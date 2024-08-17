@@ -17,7 +17,7 @@ export const login = async (data) => {
   const response = await axiosPublic
     .post("/user/login", data)
     .catch((error) => {
-      toast.error("Something went wrong! Please try again");
+      toast.error("Something went wrong! May be your server is down.");
       throw error.response.data;
     });
 

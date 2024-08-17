@@ -1,12 +1,14 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const getapprovedDps = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .get("http://localhost:5000/api/v1/dpsform?approveStatus=approved", {
+  const response = await axiosPublic
+    .get("/dpsform?approveStatus=approved", {
       headers: { Authorization: accessToken },
     })
     .catch((error) => {
@@ -18,8 +20,8 @@ export const getapprovedDps = async () => {
 
 export const getunapprovedDps = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .get("http://localhost:5000/api/v1/dpsform?approveStatus=pending", {
+  const response = await axiosPublic
+    .get("/dpsform?approveStatus=pending", {
       headers: { Authorization: accessToken },
     })
     .catch((error) => {
@@ -32,8 +34,8 @@ export const getunapprovedDps = async () => {
 export const createDps = async (data) => {
   const accessToken = cookie.get("token");
   // console.log(data);
-  const result = await axios
-    .post("http://localhost:5000/api/v1/dpsform", data, {
+  const result = await axiosPublic
+    .post("/dpsform", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -51,8 +53,8 @@ export const updateDps = async (data) => {
   const accessToken = cookie.get("token");
   const id = data?.id;
   delete data.id;
-  const result = await axios
-    .patch(`http://localhost:5000/api/v1/dpsform/${id}`, data, {
+  const result = await axiosPublic
+    .patch(`/dpsform/${id}`, data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -68,8 +70,8 @@ export const updateDps = async (data) => {
 
 export const getAllDps = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .get("http://localhost:5000/api/v1/dpsform", {
+  const response = await axiosPublic
+    .get("/dpsform", {
       headers: { Authorization: accessToken },
     })
     .catch((error) => {
@@ -82,8 +84,8 @@ export const getAllDps = async () => {
 export const approveDpsForm = async (id) => {
   const accessToken = cookie.get("token");
   console.log(id);
-  const response = await axios
-    .patch(`http://localhost:5000/api/v1/dpsform/approve/${id}`, {
+  const response = await axiosPublic
+    .patch(`/dpsform/approve/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -108,8 +110,8 @@ export const paymentDps = async (data) => {
   const id = data?.id;
   delete data.id;
   console.log(data);
-  const response = await axios
-    .patch(`http://localhost:5000/api/v1/dpsform/payInstallment/${id}`, data, {
+  const response = await axiosPublic
+    .patch(`/dpsform/payInstallment/${id}`, data, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -128,8 +130,8 @@ export const dpsStatusChange = async (data) => {
   delete data.id;
   console.log("object");
   console.log(data);
-  const response = await axios
-    .patch(`http://localhost:5000/api/v1/dpsform/closeDps/${id}`, data, {
+  const response = await axiosPublic
+    .patch(`/dpsform/closeDps/${id}`, data, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -151,8 +153,8 @@ export const dpsReturnAmount = async (data) => {
 
   const id = data?.id;
   delete data.id;
-  const response = await axios
-    .patch(`http://localhost:5000/api/v1/dpsform/returnAmount/${id}`, data, {
+  const response = await axiosPublic
+    .patch(`/dpsform/returnAmount/${id}`, data, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
