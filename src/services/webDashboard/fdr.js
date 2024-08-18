@@ -1,13 +1,15 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const createFdr = async (data) => {
   const accessToken = cookie.get("token");
   // console.log(data);
-  const result = await axios
-    .post("http://localhost:5000/api/v1/fdr", data, {
+  const result = await axiosPublic
+    .post("/fdr", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -23,8 +25,8 @@ export const createFdr = async (data) => {
 
 export const getFdr = async (status, type) => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .get(`http://localhost:5000/api/v1/fdr?status=${status}&fdrType=${type}`, {
+  const response = await axiosPublic
+    .get(`/fdr?status=${status}&fdrType=${type}`, {
       headers: { Authorization: accessToken },
     })
     .catch((error) => {
@@ -37,8 +39,8 @@ export const getFdr = async (status, type) => {
 export const approveFdrForm = async (id) => {
   const accessToken = cookie.get("token");
   console.log(id);
-  const response = await axios
-    .patch(`http://localhost:5000/api/v1/fdr/approve/${id}`, {
+  const response = await axiosPublic
+    .patch(`/fdr/approve/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -59,8 +61,8 @@ export const updateFdr = async (data) => {
   const id = data?._id;
   console.log(id);
   delete data.id;
-  const result = await axios
-    .patch(`http://localhost:5000/api/v1/fdr/${id}`, data, {
+  const result = await axiosPublic
+    .patch(`/fdr/${id}`, data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
