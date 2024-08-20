@@ -1,13 +1,15 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const getMemberShip = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/userapplication/getuserapplication",
+      "/userapplication/getuserapplication",
       {
         headers: { Authorization: accessToken },
       },
@@ -24,9 +26,9 @@ export const getMemberShip = async () => {
 
 export const getSingleMemberShip = async (phone) => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      `http://localhost:5000/api/v1/userapplication/getuserapplication/${phone}`,
+      `/userapplication/getuserapplication/${phone}`,
       {
         headers: { Authorization: accessToken },
       },
@@ -42,9 +44,9 @@ export const getSingleMemberShip = async (phone) => {
 };
 export const updateMemberShipStatus = async (data) => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .patch(
-      `http://localhost:5000/api/v1/userapplication/updatestatus/${data?.id}`,
+      `/userapplication/updatestatus/${data?.id}`,
       { status: data?.type },
       {
         headers: { Authorization: accessToken },
@@ -65,9 +67,9 @@ export const updateMemberShipStatus = async (data) => {
 
 export const deleteMemberShip = async (id) => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .delete(
-      `http://localhost:5000/api/v1/userapplication/delete/${id}`,
+      `/userapplication/delete/${id}`,
       {
         headers: { Authorization: accessToken },
       },
@@ -88,9 +90,9 @@ export const deleteMemberShip = async (id) => {
 // ---------------------------------membership form update-----------------------------------
 export const updateMemberShipForm = async (data) => {
   const accessToken = cookie.get("token");
-  const result = await axios
+  const result = await axiosPublic
     .patch(
-      `http://localhost:5000/api/v1/userapplication/updateuserapplicationbyadmin/${data.personalInformation?.phone}`,
+      `/userapplication/updateuserapplicationbyadmin/${data.personalInformation?.phone}`,
       data,
       {
         headers: { Authorization: accessToken },
@@ -113,9 +115,9 @@ export const updateMemberShipForm = async (data) => {
 export const deleteMemberShipPhoto = async (data) => {
   const accessToken = cookie.get("token");
   console.log(data);
-  const response = await axios
+  const response = await axiosPublic
     .delete(
-      `http://localhost:5000/api/v1/userapplication/deleteimages/${data.key}/${data.id}`,
+      `/userapplication/deleteimages/${data.key}/${data.id}`,
       {
         headers: { Authorization: accessToken },
       },
