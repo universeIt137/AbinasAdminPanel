@@ -2,13 +2,15 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const getAllMedia = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/media",
+      "/media",
       {
         headers: { Authorization: accessToken },
       },
@@ -25,8 +27,8 @@ export const getAllMedia = async () => {
 
 export const createMedia = async (data) => {
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/media", data, {
+  const result = await axiosPublic
+    .post("/media", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -39,10 +41,12 @@ export const createMedia = async (data) => {
     });
   return result;
 };
+
+
 export const deleteMediaNews = async (id) => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/media/${id}`, {
+  const response = await axiosPublic
+    .delete(`/media/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
