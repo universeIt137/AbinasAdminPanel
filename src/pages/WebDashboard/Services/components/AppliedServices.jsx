@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Loader from "../../../../shared/Loader";
 import Table from "../../../../shared/Table/Table";
 import { useQuery, useQueryClient } from "react-query";
-import { getAllAppliedServices } from "../../../../services/webDashboard/service";
+import { getAllAppliedServices, getAllServices } from "../../../../services/webDashboard/service";
 
 const AppliedServices = () => {
   const [appliedServices, setAppliedServices] = useState([]);
@@ -10,7 +10,7 @@ const AppliedServices = () => {
 
   const appliedServiceQuery = useQuery(
     "appliedService",
-    () => getAllAppliedServices(),
+    () => getAllServices(),
     {
       cacheTime: 0,
       staleTime: Infinity,
