@@ -2,13 +2,15 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const getAllServices = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/services",
+      "/services",
       {
         headers: { Authorization: accessToken },
       }
@@ -25,8 +27,8 @@ export const getAllServices = async () => {
 
 export const createService = async (data) => {
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/services/createservice", data, {
+  const result = await axiosPublic
+    .post("/services/createservice", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -39,10 +41,12 @@ export const createService = async (data) => {
     });
   return result;
 };
+
+
 export const deleteSingleService = async (id) => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/services/${id}`, {
+  const response = await axiosPublic
+    .delete(`/services/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -57,9 +61,9 @@ export const deleteSingleService = async (id) => {
 
 export const getAllAppliedServices = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/apply-service",
+      "/apply-service",
       {
         headers: { Authorization: accessToken },
       }
