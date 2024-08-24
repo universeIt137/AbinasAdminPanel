@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { getAllDps } from "../../../services/webDashboard/dps";
 import ReturnHistory from "./component/ReturnHistory";
 import ReturnTable from "../../../shared/ReturnTable/ReturnTable";
+import { getFdr } from "../../../services/webDashboard/fdr";
 
 const FdrWithdraw = () => {
   const [loading, setLoading] = useState(false); // loading off
@@ -13,7 +14,7 @@ const FdrWithdraw = () => {
   const [selectedDpsReturn, setSelectedDpsReturn] = useState([]);
   const [updateStatus, setUpdateStatus] = useState(false);
 
-  const dpsHistoryQuery = useQuery("depsHistory", () => getAllDps(), {
+  const dpsHistoryQuery = useQuery("depsHistory", () => getFdr(), {
     cacheTime: 0,
     staleTime: Infinity,
     refetchOnMount: true,
