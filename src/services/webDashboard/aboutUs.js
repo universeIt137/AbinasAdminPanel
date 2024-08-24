@@ -2,13 +2,16 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
 
+
 export const getAllAboutUs = async () => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/about-us",
+      "/about-us",
       {
         headers: { Authorization: accessToken },
       },
@@ -24,9 +27,10 @@ export const getAllAboutUs = async () => {
 };
 
 export const createAboutUs = async (data) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/about-us", data, {
+  const result = await axiosPublic
+    .post("/about-us", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -40,9 +44,10 @@ export const createAboutUs = async (data) => {
   return result;
 };
 export const deleteSingleAboutUs = async (id) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/about-us/${id}`, {
+  const response = await axiosPublic
+    .delete(`/about-us/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
