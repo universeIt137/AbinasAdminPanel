@@ -2,13 +2,15 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
+const axiosPublic = useAxiosPublic();
 
 export const getAllConcern = async () => {
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/our-concern",
+      "/our-concern",
       {
         headers: { Authorization: accessToken },
       },
@@ -25,8 +27,8 @@ export const getAllConcern = async () => {
 
 export const createConcern = async (data) => {
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/our-concern", data, {
+  const result = await axiosPublic
+    .post("/our-concern", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -41,8 +43,8 @@ export const createConcern = async (data) => {
 };
 export const deleteSingleConcern = async (id) => {
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/our-concern/${id}`, {
+  const response = await axiosPublic
+    .delete(`/our-concern/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
