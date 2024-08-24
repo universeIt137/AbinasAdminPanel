@@ -2,14 +2,17 @@
 import { toast } from "react-toastify";
 import axios from "../../utils/axiosInterceptor";
 import Cookies from "universal-cookie";
+import { useActionData } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const cookie = new Cookies();
 
 // Job Circular
 export const getAllJobCircular = async () => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/get-in-touch/job-circular",
+      "/get-in-touch/job-circular",
       {
         headers: { Authorization: accessToken },
       },
@@ -25,9 +28,10 @@ export const getAllJobCircular = async () => {
 };
 
 export const createJobCircular = async (data) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/get-in-touch/job-circular", data, {
+  const result = await axiosPublic
+    .post("/get-in-touch/job-circular", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -41,9 +45,10 @@ export const createJobCircular = async (data) => {
   return result;
 };
 export const deleteSingleJobCircular = async (id) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/get-in-touch/job-circular/${id}`, {
+  const response = await axiosPublic
+    .delete(`/get-in-touch/job-circular/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -58,10 +63,11 @@ export const deleteSingleJobCircular = async (id) => {
 
 // Notice ------------------------------------
 export const getAllNotice = async () => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/get-in-touch/notice",
+      "/get-in-touch/notice",
       {
         headers: { Authorization: accessToken },
       },
@@ -77,9 +83,10 @@ export const getAllNotice = async () => {
 };
 
 export const createNotice = async (data) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/get-in-touch/notice", data, {
+  const result = await axiosPublic
+    .post("/get-in-touch/notice", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -93,9 +100,10 @@ export const createNotice = async (data) => {
   return result;
 };
 export const deleteSingleNotice = async (id) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/get-in-touch/notice/${id}`, {
+  const response = await axiosPublic
+    .delete(`/get-in-touch/notice/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -109,10 +117,11 @@ export const deleteSingleNotice = async (id) => {
 };
 // Csr ------------------------------------
 export const getAllCsr = async () => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/get-in-touch/csr",
+      "/get-in-touch/csr",
       {
         headers: { Authorization: accessToken },
       },
@@ -128,9 +137,10 @@ export const getAllCsr = async () => {
 };
 
 export const createCsr = async (data) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/get-in-touch/csr", data, {
+  const result = await axiosPublic
+    .post("/get-in-touch/csr", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -144,9 +154,10 @@ export const createCsr = async (data) => {
   return result;
 };
 export const deleteSingleCsr = async (id) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/get-in-touch/csr/${id}`, {
+  const response = await axiosPublic
+    .delete(`/get-in-touch/csr/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
@@ -161,10 +172,11 @@ export const deleteSingleCsr = async (id) => {
 
 // Contact Us ------------------------------------
 export const getAllContactUs = async () => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
+  const response = await axiosPublic
     .get(
-      "http://localhost:5000/api/v1/get-in-touch/contact",
+      "/get-in-touch/contact",
       {
         headers: { Authorization: accessToken },
       },
@@ -180,9 +192,10 @@ export const getAllContactUs = async () => {
 };
 
 export const createContactUs = async (data) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const result = await axios
-    .post("http://localhost:5000/api/v1/get-in-touch/contact", data, {
+  const result = await axiosPublic
+    .post("/get-in-touch/contact", data, {
       headers: { Authorization: accessToken },
     })
     .then((response) => {
@@ -195,10 +208,12 @@ export const createContactUs = async (data) => {
     });
   return result;
 };
+
 export const deleteSingleContactUs = async (id) => {
+  const axiosPublic = useAxiosPublic();
   const accessToken = cookie.get("token");
-  const response = await axios
-    .delete(`http://localhost:5000/api/v1/get-in-touch/contact/${id}`, {
+  const response = await axiosPublic
+    .delete(`/get-in-touch/contact/${id}`, {
       headers: { Authorization: accessToken },
     })
     .then((res) => {
