@@ -73,6 +73,7 @@ const AddService = () => {
         specialNote: noteList,
         description,
       };
+      console.log(newService);
       const payload = generatePayload(newService);
       await createServiceMutation.mutateAsync(payload);
       setServiceName("");
